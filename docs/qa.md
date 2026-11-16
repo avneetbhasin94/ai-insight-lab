@@ -35,3 +35,14 @@ The hosted deployment is verified separately by native Sites status. A private s
 ## Remaining limits
 
 No real provider credentials or subscription, no real injury/score/schedule/news requests, no live embedding or language-model calls, no trained outcome predictor, no chronological forecast backtest, no calibration record, no production abuse/load test, and no real-device assistive-technology audit. Optional model tests use fake adapters. Citation and numeric checks cannot prove arbitrary semantic truth. No public-access or GitHub publication was performed.
+
+## Server integration update
+
+The reviewed second version adds the private Worker API, NBA provider adapter, real-game evidence path, opt-in model HTTP adapters and an offline forecasting foundation. The account/key remains unconfigured; no provider or paid model call was made.
+
+- Final combined suite: **152/152 tests passed** (21 learning engine,25 RAG pipeline,29 provider adapter,23 real-game evidence,17 model adapter,17 application/UI integration,20 forecasting).
+- The existing31-case local evidence evaluation still passes; it remains a small synthetic fixture benchmark.
+- Syntax checks and self-contained Worker build pass. A Node smoke test of the built Worker served the page and returned provider not_configured, model unavailable and paidCallsEnabled false.
+- npm audit reported no known advisories in the pinned dependency graph at this check. This is not a security guarantee.
+- Browser QA confirmed the new real-game panel renders, checks connection state and returns an explicit missing-key message without filling in sample scores. Tests also execute the actual UI script with deferred fake HTTP responses to verify date-change races are suppressed.
+- The provider key must be added securely after free account signup. Free coverage excludes injuries/player statistics. Model adapters and the pregame model have no real-service or real-data performance verification; forecast correctness tests use synthetic results only.

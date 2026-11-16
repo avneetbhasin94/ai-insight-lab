@@ -1,1 +1,19 @@
-{"name":"fanform-sports-lab","version":"0.1.0","private":true,"type":"module","scripts":{"test":"node --test tests/*.test.mjs","eval":"node tests/eval.mjs","check":"node --check dist/app.js && node --check dist/engine.js && node --check server/rag.mjs"},"engines":{"node":">=20"}}
+{
+  "name": "fanform-sports-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "eval": "node tests/eval.mjs",
+    "check": "node --check dist/app.js && node --check dist/real-data.js && node --check server/application.mjs && node --check server/rag.mjs",
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/dev.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

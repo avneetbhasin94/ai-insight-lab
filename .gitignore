@@ -9,3 +9,5 @@ node_modules/
 coverage/
 *.tar.gz
 .openai/source-state.json
+
+dist/server/

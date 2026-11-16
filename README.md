@@ -2,7 +2,7 @@
 
 A private, mobile-first sports-analysis prototype built for fans who want to understand the evidence behind a matchup. The design and implementation are original. The project is not affiliated with a league, team, sportsbook or OpenAI.
 
-**Current state:** NBA only. All matchups, team statistics and scenario percentages are synthetic. There are no live scores, actual injury reports, news feeds or validated predictions. No paid subscriptions or model API calls were used. This is not the earlier stock website.
+**Current state:** NBA only. A server-side BALLDONTLIE integration and a separate real-game desk are implemented. The provider account/key is not yet configured, so real connectivity is unverified. Learning fixtures and scenario percentages remain synthetic. No current injuries, paid subscriptions, model API calls or validated predictions exist. This is not the earlier stock website.
 
 ## Try the complete working flow
 
@@ -14,22 +14,23 @@ A private, mobile-first sports-analysis prototype built for fans who want to und
 
 ## Run locally
 
-Requires Node.js 20+ for checks; the website itself is buildless and has no package dependencies.
+Requires Node.js 20+. The only development dependency is pinned esbuild; the deployed Worker has no external runtime dependencies. Keep all credentials server-side.
 
 ```sh
+npm ci
 npm test
 npm run eval
 npm run check
-python3 -m http.server 8080 --directory dist
+npm run build
 ```
 
-Open http://localhost:8080 in a browser. Loading `index.html` directly from disk will not support ES module imports. In the managed Sites environment use its managed preview instead of starting another server.
+For full local API preview, npm run dev serves the application without credentials on port 4173. In the managed Sites environment use its preview daemon instead of starting another server. A plain static server can show learning fixtures but cannot serve real-data APIs. The build embeds the preserved assets into one Worker module.
 
 ## What is actually AI?
 
 The website runs a small **supervised multinomial Naive Bayes intent classifier** and **BM25 lexical retrieval** locally. It uses an approved evidence corpus, explicit routing/abstention rules, deterministic numerical tools and structured cited answers. Answers are extractive, assembled from evidence and templates. The classifier is trained on a tiny hand-authored teaching dataset; its performance is not a production-quality claim.
 
-**This is not deployed generative RAG.** The optional `server/rag.mjs` implements dependency-injected chunking, vector retrieval, a model boundary, tools, budgets and output checks. Its embedding/generation adapters are tested with mocks. It has no default provider, no key, no network client, no deployed API route and no end-to-end live-model verification. A real embedding model and generator require separate setup, provider/licence checks and bounded server-side deployment.
+**This is not deployed generative RAG.** The optional `server/rag.mjs` implements dependency-injected chunking, vector retrieval, a model boundary, tools, budgets and output checks. Its embedding/generation adapters are tested with mocks. It has no default provider, no key, no network client, a disabled-by-default private API route and no end-to-end live-model verification. A real embedding model and generator require separate setup, provider/licence checks and bounded server-side deployment.
 
 See [the AI concept map](docs/ai-concepts.md) for the meaning, implementation location, test method and status of each concept, and [the architecture](docs/architecture.md) for the upgrade path and interview-friendly explanation.
 
@@ -66,7 +67,7 @@ A future real prediction model must use timestamped pregame inputs, chronologica
 
 ## Security and privacy
 
-- No keys, credentials, personal details, trackers or external scripts are bundled.
+- No keys, credentials, personal details, trackers or external scripts are bundled. Provider/model adapters receive secrets only at runtime; builds never read keys.
 - Questions are handled in browser memory; local storage contains only saved sample matchup IDs.
 - Dynamic UI text uses `textContent`, never model/user-controlled HTML.
 - Source links come from a reviewed register; new-tab links use `noopener noreferrer`.
@@ -80,3 +81,13 @@ Before publishing a real-data version, verify hosting configuration, data permis
 ## GitHub preparation
 
 The project has no third-party runtime dependencies or copied competitor assets. `.gitignore` excludes environment files, key files and generated archives. Before any repository publication, review the exact files/history and any future data/provider licences; do not commit real `.env` files or tokens. No GitHub repository was created or published by this task. Choose a code licence intentionally before a public release.
+
+## Real data and model setup
+
+See [model and billing setup](docs/model-setup.md). Set BALLDONTLIE_API_KEY only as a hosted secret after the free account exists; teams/players/games are free, injuries and player performance stats are not. No trial or paid subscription was selected. The real-data panel calls only same-origin private APIs and never falls back to a synthetic score.
+
+The NBA adapter normalizes provider data with bounded fetches, an in-memory shared five/minute allowance, caching and safe errors. The live-evidence module constructs game evidence and extractive answers. The application module serves the preserved UI and API routes. Real HTTP model adapters are verified with mocks only. AI_API_ENABLED and AI_SPENDING_APPROVED both default off; browser requests cannot enable them. Provider billing controls and a durable shared spending guard remain prerequisites for a broader launch.
+
+A source record fetched from the NBA provider is real data, but is not proof of a working language model. A real-model RAG claim requires successful embedding, retrieval, generation, citation validation and real-service evaluations, not just keys in configuration.
+
+The [forecasting foundation](docs/forecasting.md) describes Elo, pregame snapshots, outcome scoring and leakage-free evaluation. It has synthetic tests only; no 60-70% daily accuracy, calibrated win probability or betting profitability has been established. Durable prediction storage and a real historical training dataset remain to connect.

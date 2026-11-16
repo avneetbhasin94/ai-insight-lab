@@ -1,5 +1,10 @@
 # FANFORM architecture: what runs and what comes next
 
+## Server integration update — 16 November 2026
+
+The current version adds a server-backed real-game desk. The BALLDONTLIE HTTP adapter, game-evidence retrieval, model HTTP adapters and private API routes are implemented and mock-tested; no provider account/key or real model call is yet verified. The local learning assistant described below remains a separate synthetic-data path. The embedding/generation route defaults disabled. See [model setup](model-setup.md), [forecasting](forecasting.md), server/application.mjs, server/nba-provider.mjs, server/live-evidence.mjs and server/model-adapters.mjs for the new boundaries. A key being present does not establish genuine RAG or forecast accuracy.
+
+
 Updated 16 November 2026. Current scope: NBA basketball.
 
 FANFORM has two deliberately separate paths. The private prototype runs a small local text classifier, lexical retrieval, extractive explanations and deterministic basketball calculations in the browser. An optional server module shows how a future model-backed assistant could work. It has no provider SDK, network call, key lookup or default model and is **not connected to the website**. Its embedding and generation adapters have only been exercised with scripted fakes.

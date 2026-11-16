@@ -162,10 +162,10 @@ function showMethod() {
       ['Numerical tools', 'Deterministic scenario and effective field goal percentage functions.', 'Working; scenario weights invented'],
       ['Evals + observability', 'Held-out questions, retrieval/citation checks, math and abstention tests. In-memory traces omit raw questions.', 'Runnable code + session traces'],
       ['Embeddings / vector search', 'Dependency-injected vector RAG module; tests use fake adapters. No real embedding model is connected.', 'Mock-tested boundary'],
-      ['Generative RAG / model API', 'Server module supports an injected generator, budgets and output checks. It is not deployed or connected here.', 'Mock-tested boundary'],
+      ['Generative RAG / model API', 'Server module supports an injected generator, budgets and output checks. Its private API route is deployed but disabled; no real model has been verified.', 'Mock-tested boundary'],
       ['Prediction model', 'Current percentages are hand-authored baselines with a sensitivity formula; chronological backtests and calibration remain to build.', 'Simulated / planned']
     ]);
-    const note = element('div', 'dialog-note'); paragraph(note, 'No API keys, live sports APIs, external models or analytics trackers are used by this website. It cannot verify injuries, scores or upcoming schedules.'); parent.append(note);
+    const note = element('div', 'dialog-note'); paragraph(note, 'The learning assistant uses no provider key, external model or analytics tracker. Its fixtures are synthetic. The separate real NBA desk has its own server-side provider connection and status; it does not supply a current injury feed.'); parent.append(note);
     const snapshot = getObservabilitySnapshot(); heading(parent, 'This browser session');
     paragraph(parent, `${snapshot.requests} questions processed · ${snapshot.supported} supported · ${snapshot.insufficient} insufficient · ${snapshot.refused} refused · ${snapshot.meanLatencyMs} ms mean engine latency. External API calls: 0. External AI cost: $0. These are current session measurements, not production benchmarks.`);
     heading(parent, 'What would become real next?'); paragraph(parent, 'Licensed NBA data and dated injury statuses arrive through a server cache. A bounded model can then explain retrieved facts; a separately trained and backtested model supplies any forecast. A language model should never invent the probability.');
@@ -174,7 +174,7 @@ function showMethod() {
 function showSources() {
   showDialog('The data desk.', parent => {
     const note = element('div', 'dialog-note'); paragraph(note, `Fixture pack v0.1 · created ${AS_OF}. Every team metric, matchup and scenario baseline is invented for teaching. There is no actual scheduled event or player injury implied.`); parent.append(note);
-    heading(parent, 'Connected data'); paragraph(parent, 'Live scores: not connected. Injury reports: not connected. News: not connected. External language model: not connected. Team names identify examples; badges are original text illustrations, not official logos.');
+    heading(parent, 'Connected data'); paragraph(parent, 'Learning lab: synthetic fixtures only. For actual schedules and scores, check the separate real NBA desk and its fetch timestamp. Injury reports and news are not connected. External language-model calls are disabled by default. Team names identify examples; badges are original text illustrations, not official logos.');
     heading(parent, 'Definition references');
     SOURCE_REGISTRY.filter(s => s.url).forEach(source => { const p = element('p'); p.append(link(source.title, source.url)); parent.append(p); paragraph(parent, source.note); });
     heading(parent, 'Original design references');
