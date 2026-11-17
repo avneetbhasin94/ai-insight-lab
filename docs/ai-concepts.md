@@ -1,4 +1,4 @@
-# FANFORM AI concepts and interview guide
+# AI Insight Lab AI concepts and interview guide
 
 ## Server integration update — 16 November 2026
 

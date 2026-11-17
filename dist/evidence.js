@@ -1,4 +1,4 @@
-/** FANFORM's bundled, editorially controlled evidence. No live feed is connected. */
+/** AI Insight Lab's bundled, editorially controlled evidence. No live feed is connected. */
 export const AS_OF = '2026-11-16';
 
 const freeze = value => {
@@ -11,8 +11,8 @@ const freeze = value => {
 
 export const SOURCES = freeze([
   { id: 'nba-glossary', title: 'NBA Stats glossary', url: 'https://www.nba.com/stats/help/glossary', kind: 'official-reference', asOf: AS_OF, note: 'Definition reference, verified 16 November 2026. No statistics feed or republication licence is implied.' },
-  { id: 'fanform-method', title: 'FANFORM synthetic method card', kind: 'synthetic-method', asOf: AS_OF, note: 'Hand-authored educational demonstration. No trained outcome model, injury feed, bookmaker odds or validated forecast.' },
-  { id: 'fanform-availability', title: 'FANFORM data availability register', kind: 'availability', asOf: AS_OF, note: 'No live API, current injury report, external language model or account is connected.' }
+  { id: 'fanform-method', title: 'AI Insight Lab synthetic method card', kind: 'synthetic-method', asOf: AS_OF, note: 'Hand-authored educational demonstration. No trained outcome model, injury feed, bookmaker odds or validated forecast.' },
+  { id: 'fanform-availability', title: 'AI Insight Lab data availability register', kind: 'availability', asOf: AS_OF, note: 'No live API, current injury report, external language model or account is connected.' }
 ]);
 
 const fixture = (id, sport, league, home, away, baselineProbability, metrics, tempo, note) => ({
@@ -37,7 +37,7 @@ export const EVIDENCE = freeze([
   doc('nba-offrtg', 'Reading offensive rating', 'Offensive rating: points/100 possessions.', 'basketball', 'nba-glossary'),
   doc('nba-efg', 'Reading effective field goal percentage', 'eFG% = 100 × (FGM + 0.5 × 3PM) / FGA.', 'basketball', 'nba-glossary'),
   doc('method-scenarios', 'How the synthetic scenario works', 'The scenario uses a hand-authored baseline, then subtracts hypothetical absence-impact and workload penalties, up to 10 and 5 percentage points respectively. The displayed percentage is bounded from 5 to 95. These choices are invented and have not been trained, calibrated or backtested.', 'all', 'fanform-method', { kind: 'synthetic-method' }),
-  doc('method-probability', 'A probability is not a promise', 'FANFORM percentages are synthetic educational inputs, not validated forecasts or bookmaker prices. A probability demonstration cannot establish betting value, profit or guaranteed results. There is no calibration or backtest result to report.', 'all', 'fanform-method', { kind: 'synthetic-method' }),
+  doc('method-probability', 'A probability is not a promise', 'AI Insight Lab percentages are synthetic educational inputs, not validated forecasts or bookmaker prices. A probability demonstration cannot establish betting value, profit or guaranteed results. There is no calibration or backtest result to report.', 'all', 'fanform-method', { kind: 'synthetic-method' }),
   doc('availability-report', 'Data sources and what is actually connected', 'No live scores, current schedules, current injuries, player availability feed, paid sports API or external language model is connected. All matchups and numeric team profiles are hand-authored synthetic fixtures created 16 November 2026. The official NBA link supports definitions only.', 'all', 'fanform-availability', { kind: 'availability' }),
   doc('method-retrieval', 'How this evidence assistant works', 'The local assistant classifies an intent with a small trained Naive Bayes text classifier, retrieves approved evidence with lexical BM25 scoring, and assembles an extractive answer with source IDs. It does not call a language model, use embeddings or perform generative RAG. User questions and traces stay in browser memory.', 'all', 'fanform-method', { kind: 'synthetic-method' }),
   ...FIXTURES.map(f => doc(`doc-${f.id}`, `${f.home.name} vs ${f.away.name} · synthetic fixture`,

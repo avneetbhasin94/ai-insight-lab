@@ -4,7 +4,7 @@ Official product and API pages checked **16 November 2026**. Current scope is NB
 
 ## Competitor patterns worth adapting
 
-| Reference | Observed product pattern | Fanform decision |
+| Reference | Observed product pattern | AI Insight Lab decision |
 | --- | --- | --- |
 | [The Stat Desk](https://www.thestatdeskhq.app/nba/) | Game board, team rankings, matchup context, injury-aware explanations, AI questions, and a visible prediction record. It says picks are frozen before games and changed injury runs are marked. | Make evidence-backed questions central, expose assumptions, and reserve a genuine chronological model record for a later validated predictor. Do not scrape its ESPN-backed data or copy ratings, text, model or branding. |
 | [Sofascore](https://www.sofascore.com/basketball) | Fixtures, sport/league navigation, favourites and team comparisons. | Compact matchup cards, local saved state and quick team search. No fake live indicator. |

@@ -1,4 +1,6 @@
-# Fanform · NBA Evidence Lab
+# AI Insight Lab
+
+An extensible project for explainable, evidence-backed AI analysis. NBA is the first implemented data lab; additional domains are future work.
 
 A private, mobile-first sports-analysis prototype built for fans who want to understand the evidence behind a matchup. The design and implementation are original. The project is not affiliated with a league, team, sportsbook or OpenAI.
 
@@ -30,7 +32,7 @@ For full local API preview, npm run dev serves the application without credentia
 
 The website runs a small **supervised multinomial Naive Bayes intent classifier** and **BM25 lexical retrieval** locally. It uses an approved evidence corpus, explicit routing/abstention rules, deterministic numerical tools and structured cited answers. Answers are extractive, assembled from evidence and templates. The classifier is trained on a tiny hand-authored teaching dataset; its performance is not a production-quality claim.
 
-**This is not deployed generative RAG.** The optional `server/rag.mjs` implements dependency-injected chunking, vector retrieval, a model boundary, tools, budgets and output checks. Its embedding/generation adapters are tested with mocks. It has no default provider, no key, no network client, a disabled-by-default private API route and no end-to-end live-model verification. A real embedding model and generator require separate setup, provider/licence checks and bounded server-side deployment.
+**This is not deployed generative RAG.** The optional `server/rag.mjs` implements dependency-injected chunking, vector retrieval, a model boundary, tools, budgets and output checks. Its embedding/generation adapters are tested with mocks. The core is provider-independent. Real HTTP adapters and a private API route exist, but model use defaults disabled, no key is bundled, and no end-to-end live-model verification has passed. A real embedding model and generator require separate setup, provider/licence checks and bounded server-side deployment.
 
 See [the AI concept map](docs/ai-concepts.md) for the meaning, implementation location, test method and status of each concept, and [the architecture](docs/architecture.md) for the upgrade path and interview-friendly explanation.
 
@@ -91,3 +93,13 @@ The NBA adapter normalizes provider data with bounded fetches, an in-memory shar
 A source record fetched from the NBA provider is real data, but is not proof of a working language model. A real-model RAG claim requires successful embedding, retrieval, generation, citation validation and real-service evaluations, not just keys in configuration.
 
 The [forecasting foundation](docs/forecasting.md) describes Elo, pregame snapshots, outcome scoring and leakage-free evaluation. It has synthetic tests only; no 60-70% daily accuracy, calibrated win probability or betting profitability has been established. Durable prediction storage and a real historical training dataset remain to connect.
+
+## Run on your laptop with a private NBA key
+
+Install Node.js 22 or newer, open this project folder in Visual Studio Code, and run npm ci. Copy the blank .env.example to .env.local using the editor, then put your BALLDONTLIE_API_KEY value only in .env.local. Do not put it in any file under dist/.
+
+Run npm run dev:local and open http://127.0.0.1:4173. This mode exposes only the NBA key to the local backend and binds to loopback. It cannot enable paid model calls, even if unrelated AI variables are present in the local environment. The regular npm run dev remains a keyless managed-preview mode. Local setup does not configure the separately hosted Site.
+
+Before committing, run git check-ignore .env.local and git status --short. The first command should print .env.local; the second must not list it. The example file is intentionally committed with blank credentials. Do not use force-add for secret files. Ignoring does not remove previously committed secrets: if a real key ever enters Git history, revoke/rotate it and clean that history before publication.
+
+See [the local setup guide](docs/local-development.md) and [development history](CHANGELOG.md). Never put keys in issue descriptions, screenshots, README examples, build settings that substitute browser variables, or commit messages.

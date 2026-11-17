@@ -1,4 +1,4 @@
-# FANFORM architecture: what runs and what comes next
+# AI Insight Lab architecture: what runs and what comes next
 
 ## Server integration update — 16 November 2026
 
@@ -7,7 +7,7 @@ The current version adds a server-backed real-game desk. The BALLDONTLIE HTTP ad
 
 Updated 16 November 2026. Current scope: NBA basketball.
 
-FANFORM has two deliberately separate paths. The private prototype runs a small local text classifier, lexical retrieval, extractive explanations and deterministic basketball calculations in the browser. An optional server module shows how a future model-backed assistant could work. It has no provider SDK, network call, key lookup or default model and is **not connected to the website**. Its embedding and generation adapters have only been exercised with scripted fakes.
+AI Insight Lab has two deliberately separate paths. The private prototype runs a small local text classifier, lexical retrieval, extractive explanations and deterministic basketball calculations in the browser. The server integration includes real HTTP adapter code and a private model route, disabled until separately configured and authorized. No provider SDK or key is bundled. Embedding and generation are verified with scripted fakes only; no real-model response has been established.
 
 No live scores, schedules, current player injuries, bookmaker odds or licensed sports feed are connected. NBA team profiles, matchup baselines and scenario changes are explicitly synthetic. Official NBA definition references do not supply current team statistics or imply a data licence. The displayed scenario percentage is untrained and unvalidated.
 

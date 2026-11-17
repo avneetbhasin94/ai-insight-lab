@@ -59,7 +59,7 @@ export function runEvaluation() {
   const criticalPass = rows.every(r => r.statusPass && r.schemaAndSourceIdentityPass && r.evidencePass && r.numericalPass);
   const calculationsPass = calculateScenario('basketball', 0.5, 0.4).probability === 51 && calculateScenario('basketball', 0.5, 0.2).probability === 52 && calculateEffectiveFieldGoal(40, 12, 90) === 51.11;
   return {
-    suite: 'FANFORM held-out local evidence evaluation', version: 1,
+    suite: 'AI Insight Lab held-out local evidence evaluation', version: 1,
     scope: `${EVAL_CASES.length} hand-authored questions; no external model or live data. These checks do not validate sports predictions or open-ended factual accuracy.`,
     passed: criticalPass && calculationsPass,
     summary: {

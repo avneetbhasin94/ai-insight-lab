@@ -6,7 +6,7 @@ const $ = id => document.getElementById(id);
 const state = { sport: 'basketball', selected: FIXTURES[0].id, search: '', onlySaved: false, availability: 0, fatigue: 0, saved: new Set(), view: 'context' };
 let toastTimer;
 try {
-  const stored = JSON.parse(localStorage.getItem('fanform-saved-v1') || '[]');
+  const stored = JSON.parse((localStorage.getItem('ai-insight-lab-saved-v1') ?? localStorage.getItem('fanform-saved-v1')) || '[]');
   if (Array.isArray(stored)) state.saved = new Set(stored.filter(id => FIXTURES.some(f => f.id === id)));
 } catch { /* Browser privacy settings may disable storage. The session still works. */ }
 
@@ -30,7 +30,7 @@ function currentFixture() { return FIXTURES.find(f => f.id === state.selected); 
 function notify(message) { clearTimeout(toastTimer); $('toast').textContent = message; $('toast').hidden = false; toastTimer = setTimeout(() => { $('toast').hidden = true; }, 2400); }
 function saveFixture(fixture) {
   if (state.saved.has(fixture.id)) state.saved.delete(fixture.id); else state.saved.add(fixture.id);
-  try { localStorage.setItem('fanform-saved-v1', JSON.stringify([...state.saved])); } catch { notify('Saved for this session. Browser storage is unavailable.'); }
+  try { localStorage.setItem('ai-insight-lab-saved-v1', JSON.stringify([...state.saved])); } catch { notify('Saved for this session. Browser storage is unavailable.'); }
   renderCards();
 }
 
@@ -189,7 +189,7 @@ function showLearning(kind) {
   showDialog(kind === 'probability' ? 'Probability is not a promise.' : 'The missing-data question.', parent => {
     if (kind === 'probability') {
       paragraph(parent, 'If a properly calibrated model assigns 60% to many comparable events, that group should win about 60% of the time in the long run. It does not mean a particular event is certain, or that a short streak proves the model works.');
-      heading(parent, 'Our prototype is not calibrated'); paragraph(parent, 'Fanform’s percentages are synthetic. Changing a slider demonstrates sensitivity to assumptions. It does not establish which team will win or whether a bet has value.');
+      heading(parent, 'Our prototype is not calibrated'); paragraph(parent, 'AI Insight Lab’s percentages are synthetic. Changing a slider demonstrates sensitivity to assumptions. It does not establish which team will win or whether a bet has value.');
       heading(parent, 'How we would test a real model'); paragraph(parent, 'Train on older games, test on later games, compare with simple baselines, and report Brier score, log loss and calibration by probability band. Freeze each forecast before tip-off so later injury news and results cannot leak backward.');
     } else {
       paragraph(parent, 'A missing injury record is not proof that a player is healthy. A missing player stat is not proof that they were injured. Data can be late, incomplete or outside a provider’s coverage.');
