@@ -2,7 +2,7 @@
 
 An extensible project for explainable, evidence-backed AI analysis. NBA is the first implemented data lab; additional domains are future work.
 
-A private, mobile-first sports-analysis prototype built for fans who want to understand the evidence behind a matchup. The design and implementation are original. The project is not affiliated with a league, team, sportsbook or OpenAI.
+A private, mobile-first sports-analysis prototype built for fans who want to understand the evidence behind a matchup. The design and implementation are original. The project is not affiliated with a league, team or sportsbook.
 
 **Current state:** NBA only. A server-side BALLDONTLIE integration and a separate real-game desk are implemented. The provider account/key is not yet configured, so real connectivity is unverified. Learning fixtures and scenario percentages remain synthetic. No current injuries, paid subscriptions, model API calls or validated predictions exist. This is not the earlier stock website.
 
@@ -56,7 +56,6 @@ docs/
   architecture.md Architecture, threat boundaries and future integrations
   research.md    Competitor insights, verified data options and cost tradeoffs
   qa.md          Actual checks and verification limits
-.openai/hosting.json  Private Sites deployment identity and static output path
 ```
 
 ## Data and prediction boundaries
@@ -103,3 +102,7 @@ Run npm run dev:local and open http://127.0.0.1:4173. This mode exposes only the
 Before committing, run git check-ignore .env.local and git status --short. The first command should print .env.local; the second must not list it. The example file is intentionally committed with blank credentials. Do not use force-add for secret files. Ignoring does not remove previously committed secrets: if a real key ever enters Git history, revoke/rotate it and clean that history before publication.
 
 See [the local setup guide](docs/local-development.md) and [development history](CHANGELOG.md). Never put keys in issue descriptions, screenshots, README examples, build settings that substitute browser variables, or commit messages.
+
+## Hosting configuration
+
+The public repository contains application code and a portable Worker build. Personal hosting manifests and deployment identifiers are maintained separately in the private deployment checkout. They are not required to install dependencies, run the app locally, test it or build it. The current hosted site continues to use its private configuration. Credentials belong in ignored local environment files or the host’s secret manager.
